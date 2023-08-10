@@ -69,13 +69,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Setup GCP Service Account
-      uses: google-github-actions/setup-gcloud@main
+    - id: 'Auth'
+      uses: google-github-actions/auth@v1
       with:
-        version: 'latest'
-        service_account_email: test-sa@terraform-pubsub.iam.gserviceaccount.com
-        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        export_default_credentials: true
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+    
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     # - name: Setup Terraform
