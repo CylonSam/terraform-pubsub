@@ -62,17 +62,20 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform
+        working-directory: ./terraform
 
     steps:
     # Checkout the repository to the GitHub Actions runner
-    - name: configure gcloud
-      id: config_gcloud
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup GCP Service Account
       uses: google-github-actions/setup-gcloud@main
       with:
-        version: "latest"
+        version: 'latest'
         service_account_email: test-sa@terraform-pubsub.iam.gserviceaccount.com
         service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        export_default_credentials: true
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     # - name: Setup Terraform
