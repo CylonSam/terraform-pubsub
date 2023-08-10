@@ -66,8 +66,13 @@ jobs:
 
     steps:
     # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
+    - name: configure gcloud
+      id: config_gcloud
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: "latest"
+        service_account_email: test-sa@terraform-pubsub.iam.gserviceaccount.com
+        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     # - name: Setup Terraform

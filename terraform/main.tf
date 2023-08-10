@@ -8,8 +8,7 @@ terraform {
 }
 
 provider "google" {
-  project     = "terraform-pubsub"
-  region      = "us-central1"
-  zone        = "us-central1-c"
-  credentials = var.SERVICE_ACCOUNT_KEY
+  project = "terraform-pubsub"
+  region  = "us-central1"
+  zone    = "us-central1-c"
 }
