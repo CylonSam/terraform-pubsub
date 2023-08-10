@@ -1,26 +1,22 @@
 resource "google_pubsub_schema" "example" {
   name = "example"
   type = "AVRO"
-  definition = {
-    "1" = <<EOF
-    {
-      "type" : "record",
-      "name" : "Avro",
-      "fields" : [
-        {
-          "name" : "burgerName",
-          "type" : "string",
-          "default": false
-        },
-        {
-          "name" : "burgerPrice",
-          "type" : "double",
-          "default": false
-        }
-      ]
-    }
-    EOF
-  }
+  definition = jsonencode({
+    "type" : "record",
+    "name" : "Avro",
+    "fields" : [
+      {
+        "name" : "burgerName",
+        "type" : "string",
+        "default" : false
+      },
+      {
+        "name" : "burgerPrice",
+        "type" : "double",
+        "default" : false
+      }
+    ]
+  })
 }
 
 resource "google_pubsub_topic" "burger" {
