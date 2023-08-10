@@ -1,5 +1,5 @@
-resource "google_pubsub_schema" "example" {
-  name = "example"
+resource "google_pubsub_schema" "burger" {
+  name = "burger"
   type = "AVRO"
   definition = jsonencode({
     "type" : "record",
@@ -26,7 +26,7 @@ resource "google_pubsub_topic" "burger" {
     foo = "bar"
   }
 
-  depends_on = [google_pubsub_schema.example]
+  depends_on = [google_pubsub_schema.burger]
   schema_settings {
     schema   = "projects/${var.project_id}/schemas/burger"
     encoding = "JSON"
